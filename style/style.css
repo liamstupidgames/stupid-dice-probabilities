@@ -1,0 +1,63 @@
+body {
+    background-color: #272A43;
+}
+
+img {
+    align-self: ;
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+}
+
+#add:hover, #minus:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.window {
+    background-color: #0f101a;
+    border-radius: 5px;
+}
+
+.sub-area {
+    width: 100%;
+    height: 70vh;
+}
+
+.main-div {
+    padding-top: 2px;
+    padding-bottom: 1px;
+    width: 100%;
+    height: 98vh;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.left-menu {
+    width: 40vh;
+}
+
+.info-area {
+    width: 80%;
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.dices-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 100%;
+    height: 60%;
+}
+
+.graph {
+
+}
