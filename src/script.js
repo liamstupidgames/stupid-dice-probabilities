@@ -72,10 +72,8 @@ function SimulateAllDices(numberDices, times) {
   let time = 0;
   let eachRunResults = [];
   while (time < times) {
-    alert(eachRunResults);
     $.merge(eachRunResults, throwDices(numberDices));
     // eachRunResults.push(...throwDices(numberDices));
-    alert(eachRunResults);
     time++;
   }
   return eachRunResults;
@@ -87,7 +85,6 @@ function simulate() {
   let dices = countDices();
   let result = SimulateAllDices(dices, toRoll);
   updateChart(result);
-  $("#graphContainer").prepend(`<h1 class="text"> ${result} </h1>`);
 }
 
 $("#add").click(addDice);
