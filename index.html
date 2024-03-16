@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./assets/web/icon.jpg" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./style/style.css">
     <script src="./src/script.js" defer></script>
@@ -27,8 +28,8 @@
                 <img id="add" src="./assets/images/add.png" height="20px" width="20px" alt="">
             </div>
             
-            <div class="graph window sub-area">
-
+            <div class="graph window sub-area" id="graphContainer">
+                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
             </div>
         
         </div>

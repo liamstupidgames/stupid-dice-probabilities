@@ -112,5 +112,6 @@ img {
 }
 
 .graph {
-
+    display: flex;
+    justify-content: center;
 }

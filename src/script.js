@@ -28,17 +28,56 @@ function throwDices(n) {
   return results;
 }
 
-function throwDices(numberDices, times) {
+function transformData(data) {
+  return {
+    one: data.filter((dice) => dice === 1).length,
+    two: data.filter((dice) => dice === 2).length,
+    three: data.filter((dice) => dice === 3).length,
+    four: data.filter((dice) => dice === 4).length,
+    five: data.filter((dice) => dice === 5).length,
+    seven: data.filter((dice) => dice === 6).length,
+  };
+}
+
+function updateChart(data) {
+  let filteredData = transformData(data);
+  const barColors = ["red", "green", "blue", "orange", "brown", "yellow"];
+  const labels = ["1", "2", "3", "4", "5", "6"];
+  const plotData = [
+    filteredData.one,
+    filteredData.two,
+    filteredData.three,
+    filteredData.four,
+    filteredData.five,
+    filteredData.seven,
+  ];
+
+  const myChart = new Chart($("#myChart"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          backgroundColor: barColors,
+          data: plotData,
+        },
+      ],
+    },
+  });
+}
+
+function updateRoll(roll) {}
+
+function SimulateAllDices(numberDices, times) {
   let time = 0;
   let eachRunResults = [];
   while (time < times) {
-  
-    let simulation = throwDices(numberDices);
-    eachRunResults.push(...simulation);
+    alert(eachRunResults);
+    $.merge(eachRunResults, throwDices(numberDices));
+    // eachRunResults.push(...throwDices(numberDices));
+    alert(eachRunResults);
     time++;
-  
   }
-
   return eachRunResults;
 }
 
@@ -46,8 +85,9 @@ function simulate() {
   let diceSide = $("#diceSide").val();
   let toRoll = $("#timesToRoll").val();
   let dices = countDices();
-  let result = throwDices(dices, toRoll);
-  alert(result);
+  let result = SimulateAllDices(dices, toRoll);
+  updateChart(result);
+  $("#graphContainer").prepend(`<h1 class="text"> ${result} </h1>`);
 }
 
 $("#add").click(addDice);
