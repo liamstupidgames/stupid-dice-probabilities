@@ -39,7 +39,7 @@ function transformData(data) {
   };
 }
 
-function updateChart(data) {
+function updateBarChart(data) {
   let filteredData = transformData(data);
   const barColors = ["red", "green", "blue", "orange", "brown", "yellow"];
   const labels = ["1", "2", "3", "4", "5", "6"];
@@ -66,7 +66,7 @@ function updateChart(data) {
   });
 }
 
-function updateRoll(roll) {}
+function updateProbabilities(roll) {}
 
 function SimulateAllDices(numberDices, times) {
   let time = 0;
@@ -84,7 +84,7 @@ function simulate() {
   let toRoll = $("#timesToRoll").val();
   let dices = countDices();
   let result = SimulateAllDices(dices, toRoll);
-  updateChart(result);
+  updateBarChart(result);
 }
 
 $("#add").click(addDice);
