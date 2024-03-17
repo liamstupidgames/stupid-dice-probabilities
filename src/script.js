@@ -52,7 +52,7 @@ function updateBarChart(data) {
     filteredData.seven,
   ];
 
-  const myChart = new Chart($("#myChart"), {
+  let barChart = new Chart($("#barChart"), {
     type: "bar",
     data: {
       labels: labels,
@@ -63,30 +63,86 @@ function updateBarChart(data) {
         },
       ],
     },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: "Total results after execution",
+      },
+    },
   });
 }
 
-function updateProbabilities(roll) {}
+function createArrayOfN(n) {
+  let array = [];
+  for (let i = 1; i <= n; i++) {
+    array.push(i);
+  }
+  return array;
+}
 
-function SimulateAllDices(numberDices, times) {
+function updateProbChart(probData, dice, times) {
+  const labels = createArrayOfN(times);
+
+  let probabilityChart = new Chart($("#probChart"), {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          data: probData,
+          borderColor: ["#ffffff"],
+          fill: true,
+          backgroundColor: "#272A43",
+          pointBackgroundColor: "#blue",
+        },
+      ],
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: `Probability of getting a ${dice} by Roll`,
+      },
+    },
+  });
+}
+
+function getProbability(results, dice) {
+  let presentDice = results.filter((wantedDice) => wantedDice === dice).length;
+  return presentDice / results.length;
+}
+
+function SimulateAllDices(numberDices, times, dice) {
   let time = 0;
-  let eachRunResults = [];
+  let allResults = [];
+  let probabilities = [];
   while (time < times) {
-    $.merge(eachRunResults, throwDices(numberDices));
-    // eachRunResults.push(...throwDices(numberDices));
+    $.merge(allResults, throwDices(numberDices));
+
+    probabilities.push(getProbability(allResults, dice));
+
     time++;
   }
-  return eachRunResults;
+  return [allResults, probabilities];
+}
+
+function clearGraphs() {
+  let barChart = undefined;
+  let probabilityChart = undefined;
 }
 
 function simulate() {
-  let diceSide = $("#diceSide").val();
+  clearGraphs();
+  let diceSide = parseInt($("#diceSide").val());
   let toRoll = $("#timesToRoll").val();
   let dices = countDices();
-  let result = SimulateAllDices(dices, toRoll);
+  let [result, probabilities] = SimulateAllDices(dices, toRoll, diceSide);
   updateBarChart(result);
+  updateProbChart(probabilities, diceSide, toRoll);
 }
 
+Chart.defaults.global.defaultFontColor = "#fff";
 $("#add").click(addDice);
 $("#minus").click(deleteDice);
 $("#run").click(simulate);

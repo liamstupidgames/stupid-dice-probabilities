@@ -13,6 +13,8 @@ img {
     cursor: pointer;
 }
 
+
+
 .hidden {
     visibility: hidden;
 }
@@ -113,10 +115,5 @@ img {
 
 .graph {
     display: flex;
-    justify-content: center;
-}
-
-#myChart {
-    width:1200px !important;
-    height:500px !important;
+    justify-content: space-around;
 }
