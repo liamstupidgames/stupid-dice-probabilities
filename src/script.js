@@ -8,6 +8,18 @@ function addDice() {
   }
 }
 
+function addAllDices() {
+  for (let dice = 0; dice < 33; dice++) {
+    addDice();
+  }
+}
+
+function clearAllDices() {
+  for (let dice = 0; dice < 33; dice++) {
+    deleteDice();
+  }
+}
+
 function deleteDice() {
   let dicesContainer = $("#dices");
   if (dicesContainer.children().length > 3) {
@@ -132,10 +144,20 @@ function clearGraphs() {
   let probabilityChart = undefined;
 }
 
+function getUserDice(){
+  let userDice = parseInt($("#diceSide").val());
+
+  if (userDice > 0 && userDice < 7) {
+    return userDice;
+  } else {
+    alert("Dices only have 6 sides, from 1 to 6");
+  }
+}
+
 function simulate() {
   clearGraphs();
-  let diceSide = parseInt($("#diceSide").val());
-  let toRoll = $("#timesToRoll").val();
+  let diceSide = getUserDice();
+  let toRoll = parseInt($("#timesToRoll").val());
   let dices = countDices();
   let [result, probabilities] = SimulateAllDices(dices, toRoll, diceSide);
   updateBarChart(result);
@@ -145,4 +167,6 @@ function simulate() {
 Chart.defaults.global.defaultFontColor = "#fff";
 $("#add").click(addDice);
 $("#minus").click(deleteDice);
+$("#allDices").click(addAllDices);
+$("#clearDices").click(clearAllDices);
 $("#run").click(simulate);
